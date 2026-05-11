@@ -34,6 +34,7 @@ Status of the `main` branch. Changes prior to the next official version change w
   - Add **1C / OneScript** support using [BSL Language Server](https://github.com/1c-syntax/bsl-language-server/).
   - Add support for more filenames to be considered by ccls and clangd.
   - Clojure (`clojure-lsp`): Fix incomplete `find_referencing_symbols` results in multi-module monorepos. clojure-lsp only discovers source paths from the descriptor at the workspace root and does not recurse for sub-module `deps.edn` / `project.clj` / `shadow-cljs.edn` / `bb.edn` files, so references in sibling modules were silently missed until those files happened to be opened by `find_symbol` / `get_symbols_overview`. Serena now scans the repo for project descriptors at startup and passes the union of their declared source paths to clojure-lsp via `initializationOptions`. Project-local `.lsp/config.edn` files are honoured as-is (no override). New `ls_specific_settings.clojure` keys: `source_paths` (explicit override) and `config_edn_path` (parse `:source-paths` from a user-supplied config file).
+  - No longer use `~/solidlsp_tmp` directory for storing temporary files
 
 * Hooks:
   - `serena-hooks auto-approve` now also emits an `allow` decision when Claude Code reports
